@@ -1,3 +1,6 @@
+<!--Realizado el día 24 de Mayo del 2019-->
+<!--Idzinil Eunice Pino Pérez-->
+<!--Web Components-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,33 +10,25 @@
     <title>Tarjeta de Presentación</title>
 
     <script>
-    class presentationCardIepz extends HTMLElement {
-        constructor(name, lastname, email){
+    class PresentationCardIepz extends HTMLElement {
+        constructor(){
             //super se usa para llamar al constructor de HTMLElement
             super();
             this.shadow = this.attachShadow({mode: 'open'});
+        }
+
+        connectedCallback(name, lastname, email){
+        }
+
+        attributeChangedCallback(nameAttribute, oldValue, newValue) {
             this.divName = document.createElement('div');
             this.divLastName = document.createElement('div1');
             this.divEmail = document.createElement('div2');
             this.shadow.appendChild(this.divName);
             this.shadow.appendChild(this.divLastName);
             this.shadow.appendChild(this.divEmail);
-        }
 
-        connectedCallback(){
-        }
-
-
-        attributeChangedCallback(nameAttribute, oldValue, newValue) {
             console.log('Cambian propiedades', nameAttribute, oldValue, newValue);
-            this.divEmail.textContent = newValue;
-
-            let pos = this.divEmail.textContent.indexOf('@');
-            console.log('Posición de @: ' + pos);
-            //El slice parte una cadena a partir de la posición indicada
-            let verificaemail = this.divEmail.textContent.slice(pos + 1);
-            console.log('Dominio del email: ' + verificaemail);
-
             if(nameAttribute === 'name'){
                 this.divName.textContent = newValue;
                 if(this.divName.textContent === 'Eunice' ){
@@ -45,8 +40,13 @@
         
             if(nameAttribute === 'email') {
                 this.divEmail.textContent = newValue;
+                let pos = this.divEmail.textContent.indexOf('@');
+                console.log('Posición de @: ' + pos);
+                //El slice parte una cadena a partir de la posición indicada
+                let verificaemail = this.divEmail.textContent.slice(pos + 1);
+                console.log('Dominio del email: ' + verificaemail);
                 if(verificaemail === 'gmail.com'){
-                    this.divEmail.textContent = 'Perteneces a Skynet: ' + this.divEmail.textContent ;
+                    this.divEmail.textContent = 'El correo pertenece a Skynet: ' + this.divEmail.textContent ;
                 }else{
                     this.divEmail.textContent = 'El correo es: ' + this.divEmail.textContent + ". No pertenece a Skynet";
                 }
@@ -58,7 +58,7 @@
         }
     }
     console.log('Presentation Card Created');
-    customElements.define('presentation-card-iepz', presentationCardIepz);
+    customElements.define('presentation-card-iepz', PresentationCardIepz);
     </script>
 
 </head>
