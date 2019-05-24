@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tarjeta de Presentación</title>
-
     <script>
     class PresentationCardIepz extends HTMLElement {
         constructor(){
@@ -22,13 +21,11 @@
 
         attributeChangedCallback(nameAttribute, oldValue, newValue) {
             this.divName = document.createElement('div');
-            this.divLastName = document.createElement('div1');
-            this.divEmail = document.createElement('div2');
+            this.divLastName = document.createElement('div');
+            this.divEmail = document.createElement('div');
             this.shadow.appendChild(this.divName);
             this.shadow.appendChild(this.divLastName);
             this.shadow.appendChild(this.divEmail);
-
-            console.log('Cambian propiedades', nameAttribute, oldValue, newValue);
             if(nameAttribute === 'name'){
                 this.divName.textContent = newValue;
                 if(this.divName.textContent === 'Eunice' ){
@@ -37,14 +34,12 @@
                     this.divName.textContent = 'Hola ' + this.divName.textContent;
                 }
             }   
-        
             if(nameAttribute === 'email') {
                 this.divEmail.textContent = newValue;
+                //El index of arroja la posición en donde se encuentra cierto elemento
                 let pos = this.divEmail.textContent.indexOf('@');
-                console.log('Posición de @: ' + pos);
                 //El slice parte una cadena a partir de la posición indicada
                 let verificaemail = this.divEmail.textContent.slice(pos + 1);
-                console.log('Dominio del email: ' + verificaemail);
                 if(verificaemail === 'gmail.com'){
                     this.divEmail.textContent = 'El correo pertenece a Skynet: ' + this.divEmail.textContent ;
                 }else{
@@ -59,7 +54,6 @@
     console.log('Presentation Card Created');
     customElements.define('presentation-card-iepz', PresentationCardIepz);
     </script>
-
 </head>
 <body>
     <presentation-card-iepz name = 'Eunice' lastName = 'Pino' email = 'idzi@gmail.com'></presentation-card-iepz>
